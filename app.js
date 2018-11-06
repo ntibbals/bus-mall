@@ -29,15 +29,15 @@ var tracker = {
 
   getUniqueImages: function () {
     //can do one at a time or all at once
-    var leftUniqueImage = products[tracker.getRandomIndex()];
-    console.log(leftUniqueImage);
-    tracker.leftImage.push(leftUniqueImage);
-    var centerUniqueImage = products[tracker.getRandomIndex()];
-    console.log(centerUniqueImage);
-    tracker.centerImage.push(centerUniqueImage);
-    var rightUniqueImage = products[tracker.getRandomIndex()];
-    console.log(rightUniqueImage);
-    tracker.rightImage.push(rightUniqueImage);
+    tracker.leftImage = products[tracker.getRandomIndex()];
+    // console.log(leftUniqueImage);
+    // tracker.leftImage.push(leftUniqueImage);
+    tracker.centerImage = products[tracker.getRandomIndex()];
+    // console.log(centerUniqueImage);
+    // tracker.centerImage.push(centerUniqueImage);
+    tracker.rightImage = products[tracker.getRandomIndex()];
+    // console.log(rightUniqueImage);
+    // tracker.rightImage.push(rightUniqueImage);
     // return [leftUniqueImage, centerUniqueImage, rightUniqueImage];
   },
   renderImages: function () { // all ideas or scaffold - think about how to break apart logic all properties you need on objects
@@ -50,7 +50,7 @@ var tracker = {
 
     leftImgEl.id = 'left-image';
     leftImgEl.src = tracker.leftImage.src;
-    leftImgEl.id = tracker.leftImage.name;
+    // leftImgEl.id = tracker.leftImage.name;
     centerImgEl.id = 'center-image';
     centerImgEl.src = tracker.centerImage.src;
     rightImgEl.id = 'right-image';
