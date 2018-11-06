@@ -1,83 +1,75 @@
 'use-strict';
 
 var products = [];
-// var name = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass']
-// var src = ['./assets/bag.jpg', './assets/banana.jpg', './assets/bathroom.jpg', './assets/boots.jpg', './assets/breakfast.jpg', './assets/bubblegum.jpg', './assets/chair.jpg', './assets/cthulhu.jpg', './assets/dog-duck.jpg', './assets/dragon.jpg', './assets/pen.jpg', './assets/petsweep.jpg', './assets/scissors.jpg', './assets/shark.jpg', './assets/sweep.jpg', './assets/tauntaun.jpg', './assets/unicorn.jpg', './assets/usb.jpg', './assets/water-can.jpg', './assets/wine-glass.jpg']
-
+var names = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 function Product(name, src) {
-     this.name = [],
-    this.src = [],
-    this.votes = votes,
-    this.views = views,
-    products.push(this);
+  this.name = name;
+  this.src = src;
+  // this.votes = votes,
+  // this.views = views,
+  products.push(this);
 }
 
-
+(function imageArray() {
+  for (var i = 0; i < names.length; i++) {
+    new Product(names[i], 'assets/' + names[i] + '.jpg');
+  }
+})();
 var tracker = {
-  totalClicks: 0, // counter for total clicks
-  mainEl: document.getElementById('bus-mall'),
-  divEl: document.createElement('div'),
-  leftImgEl: document.createElement('img'),
-  centerImgEl: document.createElement('img'),
-  rightImgEl: document.createElement('img'),
+  totalClicks: 0,
+  //image placeholders
+  leftImage: [],
+  centerImage: [],
+  rightImage: [],
+
   getRandomIndex: function () {
-    return Math.random() * (20 - 1);
+    return Math.floor(Math.random() * (20 - 1));
     console.log(this.getRandomIndex);
   },
+
   getUniqueImages: function () {
-    this.getRandomIndex(); //can do one at a time or all at once
-    for (var i = 0; i < this.name.legnth; i++)
-      var leftUniqueImage = this.names.length[i] * randomIndex;
-    var centerUniqueImage = this.name.length[i] * randomIndex;
-    var rightUniqueImage = this.name.length[i] * randomIndex;
+    //can do one at a time or all at once
+    var leftUniqueImage = products[tracker.getRandomIndex()];
+    console.log(leftUniqueImage);
+    tracker.leftImage.push(leftUniqueImage);
+    var centerUniqueImage = products[tracker.getRandomIndex()];
+    console.log(centerUniqueImage);
+    tracker.centerImage.push(centerUniqueImage);
+    var rightUniqueImage = products[tracker.getRandomIndex()];
+    console.log(rightUniqueImage);
+    tracker.rightImage.push(rightUniqueImage);
     return [leftUniqueImage, centerUniqueImage, rightUniqueImage];
   },
   renderImages: function () { // all ideas or scaffold - think about how to break apart logic all properties you need on objects 
     this.getUniqueImages();
-    // mainEl = document.getElementById('bus-mall');
-    // var divEl = document.createElement('div');
-    // var leftImgEl = document.createElement('img');
-    // var centerImgEl = document.createElement('img');
-    // var rightImgEl = document.createElement('img');
+    var mainEl = document.getElementById('bus-mall');
+    var divEl = document.createElement('div');
+    var leftImgEl = document.createElement('img');
+    var centerImgEl = document.createElement('img');
+    var rightImgEl = document.createElement('img');
 
     leftImgEl.id = 'left-image';
+    leftImgEl.src = tracker.leftImage.path;
     centerImgEl.id = 'center-image';
-    rightImgEl = 'right-image';
+    centerImgEl.src = tracker.centerImage.path;
+    rightImgEl.id = 'right-image';
+    rightImgEl.src = tracker.rightImage.path;
 
     mainEl.appendChild(divEl);
     divEl.appendChild(leftImgEl);
     divEl.appendChild(centerImgEl);
-    devicePixelRatio.appendChild(rightImgEl);
+    divEl.appendChild(rightImgEl);
   },
 
-  addClickTracker: function () {
+  // addClickTracker: function () {
 
-  },
+  // },
 
-  clickHandler: function (event) {//takes event in) // { // takes the event into 
-  },
-  };
-// (function createProducts() {
-//   ify that takes in all images and runs on page load, takes images and runs
-// })()
+  // clickHandler: function (event) {//takes event in) // { // takes the event into 
+  // },
+  // };
+
+};
+
 tracker.renderImages();
-new Product('bag', './assets/bag.jpg');
-new Product('banana', './assets/banana.jpg');
-new Product('bathroom', './assets/bathroom.jpg');
-new Product('boots', './assets/boots.jpg');
-new Product('breakfast', './assets/breakfast.jpg');
-new Product('bubblegum','./assets/bubblegum.jpg');
-new Product('chair', './assets/chair.jpg',);
-new Product('cthulhu', './assets/cthulhu.jpg');
-new Product('dog-duck', './assets/dog-duck.jpg');
-new Product('dragon', './assets/dragon.jpg');
-new Product('pen', './assets/pen.jpg');
-new Product('petsweep', './assets/petsweep.jpg');
-new Product('scissors', './assets/scissors.jpg');
-new Product('shark', './assets/shark.jpg');
-new Product('sweep', './assets/sweep.jpg');
-new Product('tauntaun', './assets/tauntaun.jpg');
-new Product('unicorn', './assets/unicorn.jpg');
-new Product('usb', './assets/usb.jpg');
-new Product('water can', './assets/water-can.jpg');
-new Product('wine glass', './assets/wine-glass.jpg');
+
