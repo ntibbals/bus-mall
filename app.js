@@ -29,9 +29,9 @@ var tracker = {
 
   getUniqueImages: function () {
     //can do one at a time or all at once
-    tracker.leftImage = products[tracker.getRandomIndex()];
+    tracker.leftImage = products[tracker.getRandomIndex()]; //pushes one item at a random index[i] from products array to property leftImage within tracker variable
     // console.log(leftUniqueImage);
-    // tracker.leftImage.push(leftUniqueImage);
+    // tracker.leftImage.push(leftUniqueImage); //DOES NOT WORK!!!
     tracker.centerImage = products[tracker.getRandomIndex()];
     // console.log(centerUniqueImage);
     // tracker.centerImage.push(centerUniqueImage);
@@ -63,12 +63,13 @@ var tracker = {
   },
 
   // addClickTracker: function () {
+    
 
   // },
 
   // clickHandler: function (event) {//takes event in) // { // takes the event into
   // },
-  // };
+  // // };
 
 };
 
