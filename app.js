@@ -12,7 +12,7 @@ function Product(name, src) {
 
 (function imageArray() {
   for (var i = 0; i < names.length; i++) {
-    new Product(names[i], 'assets/' + names[i] + '.jpg');
+    new Product(names[i], 'img/' + names[i] + '.jpg');
   }
 })();
 var tracker = {
@@ -38,9 +38,9 @@ var tracker = {
     var rightUniqueImage = products[tracker.getRandomIndex()];
     console.log(rightUniqueImage);
     tracker.rightImage.push(rightUniqueImage);
-    return [leftUniqueImage, centerUniqueImage, rightUniqueImage];
+    // return [leftUniqueImage, centerUniqueImage, rightUniqueImage];
   },
-  renderImages: function () { // all ideas or scaffold - think about how to break apart logic all properties you need on objects 
+  renderImages: function () { // all ideas or scaffold - think about how to break apart logic all properties you need on objects
     this.getUniqueImages();
     var mainEl = document.getElementById('bus-mall');
     var divEl = document.createElement('div');
@@ -49,11 +49,12 @@ var tracker = {
     var rightImgEl = document.createElement('img');
 
     leftImgEl.id = 'left-image';
-    leftImgEl.src = tracker.leftImage.path;
+    leftImgEl.src = tracker.leftImage.src;
+    leftImgEl.id = tracker.leftImage.name;
     centerImgEl.id = 'center-image';
-    centerImgEl.src = tracker.centerImage.path;
+    centerImgEl.src = tracker.centerImage.src;
     rightImgEl.id = 'right-image';
-    rightImgEl.src = tracker.rightImage.path;
+    rightImgEl.src = tracker.rightImage.src;
 
     mainEl.appendChild(divEl);
     divEl.appendChild(leftImgEl);
@@ -65,11 +66,14 @@ var tracker = {
 
   // },
 
-  // clickHandler: function (event) {//takes event in) // { // takes the event into 
+  // clickHandler: function (event) {//takes event in) // { // takes the event into
   // },
   // };
 
 };
 
 tracker.renderImages();
+console.log(tracker.leftImage);
+console.log(tracker.centerImage);
+console.log(tracker.rightImage);
 
