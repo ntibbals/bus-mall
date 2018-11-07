@@ -22,7 +22,6 @@ function Product(name, src) {
   }
 })();
 var tracker = {
-  // totalClicks: 0,
   leftImage: [], //image placeholders
   centerImage: [],
   rightImage: [],
@@ -30,49 +29,41 @@ var tracker = {
     return Math.floor(Math.random() * (20 - 1));
     console.log(this.getRandomIndex);
   },
-  getUniqueImages: function () {   
+  getUniqueImages: function () {
     tracker.leftImage = products[tracker.getRandomIndex()]; //pushes one item at a random index[i] from products array to property leftImage within tracker variable
     console.log(tracker.leftImage);
     while (tracker.leftImage in lastSet) {
       tracker.leftImage = products[tracker.getRandomIndex()];
     }
-    tracker.leftImage.views += 1;
-    if (event) {
-      tracker.leftImage.votes +=1;
-    }
     tracker.centerImage = products[tracker.getRandomIndex()];
     while (tracker.centerImage in lastSet || tracker.centerImage === tracker.leftImage) {
       tracker.centerImage = products[tracker.getRandomIndex()];
-    }
-    tracker.centerImage.views += 1;
-    if (event) {
-      tracker.centerImage.votes +=1;
     }
     tracker.rightImage = products[tracker.getRandomIndex()];
     while (tracker.rightImage in lastSet || tracker.rightImage === tracker.leftImage || tracker.rightImage === tracker.centerImage) {
       tracker.rightImage = products[tracker.getRandomIndex()];
     }
-    tracker.rightImage.views += 1;
-    if (event) {
-      tracker.leftImage.votes +=1;
+    totalClicks++;
+    if (totalClicks === 25) {
+      leftImgEl.removeEventListener('click', myClique);
+      centerImgEl.removeEventListener('click', myClique);
+      rightImgEl.removeEventListener('click', myClique);
+      renderResults();
     }
-
     leftImgEl.src = tracker.leftImage.src;
     centerImgEl.src = tracker.centerImage.src;
     rightImgEl.src = tracker.rightImage.src;
+    leftImgEl.id = tracker.leftImage.name;
+    centerImgEl.id = tracker.centerImage.name;
+    rightImgEl.id = tracker.rightImage.name;
+    tracker.leftImage.views++;
+    tracker.centerImage.views++;
+    tracker.rightImage.views++;
     lastSet.push = [tracker.leftImage, tracker.centerImage, tracker.rightImage];
-    totalClicks++;
     console.log(totalClicks);
-    if (totalClicks === 26) {
-      leftImgEl.removeEventListener('click', tracker.getUniqueImages);
-      centerImgEl.removeEventListener('click', tracker.getUniqueImages);
-      rightImgEl.removeEventListener('click', tracker.getUniqueImages);
-      renderResults();
-    }
   },
 };
 tracker.getUniqueImages();
-
 function renderResults() {
   var ulElHook = document.getElementById('results-head');
   var ulEl = document.createElement('div');
@@ -88,21 +79,22 @@ function renderResults() {
   resetEl.textContent = 'Reset Survey';
   resetDivEl.appendChild(resetEl);
   resetEl.addEventListener('click', refreshSurvey);
-
 }
 function refreshSurvey (event) {
   event.preventDefault;
   window.location.reload(true);
 }
-leftImgEl.addEventListener('click', tracker.getUniqueImages);
-centerImgEl.addEventListener('click', tracker.getUniqueImages);
-rightImgEl.addEventListener('click', tracker.getUniqueImages);
+function myClique (event) {
+  tracker.getUniqueImages();
+  var elId = event.target.id;
+  for (var i = 0; i < products.length; i++)
+    if (products[i].name === elId){
+      products[i].votes++;
+    }
+}
+leftImgEl.addEventListener('click', myClique);
+centerImgEl.addEventListener('click', myClique);
+rightImgEl.addEventListener('click', myClique);
 console.log(tracker.leftImage);
 console.log(tracker.centerImage);
 console.log(tracker.rightImage);
-
-function createChart () {
-var productResults = //need to build function for array of product results
-var canvasEl = document.getElementById('voting-results');
-
-new Chart (

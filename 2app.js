@@ -129,3 +129,22 @@ document.getElementById('right-image').addEventListener('click', function () {
 console.log(tracker.leftImage);
 console.log(tracker.centerImage);
 console.log(tracker.rightImage);
+
+
+function myClique (event) {
+  tracker.getUniqueImages();
+  var elId = event.target.id;
+  for (var i = 0; i < products.length; i++)
+    if (products[i].name === elId){
+      products[i].votes++;
+    }
+}
+
+
+leftImgEl.alt = tracker.leftImage.name;
+centerImgEl.alt = tracker.centerImage.name;
+rightImgEl.alt = tracker.rightImage.name;
+
+products[tracker.leftImage].views++;
+products[tracker.centerImage].views++;
+products[tracker.rightImage].views++;
