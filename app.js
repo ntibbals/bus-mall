@@ -35,25 +35,23 @@ var tracker = {
       tracker.leftImage = products[tracker.getRandomIndex()];
     }
     tracker.leftImage.views += 1;
-    if (event) {
-      products[0].votes +=1;
-    }
+    tracker.leftImage.votes +=1;
+    // if (event) {
+    //   var i = tracker.leftImage;
+    //   products[i].votes +=1;
+    // }
     tracker.centerImage = products[tracker.getRandomIndex()];
     while (tracker.centerImage in lastSet || tracker.centerImage === tracker.leftImage) {
       tracker.centerImage = products[tracker.getRandomIndex()];
     }
     tracker.centerImage.views += 1;
-    // if (event) {
-    //   tracker.leftImage.votes +=1;
-    // }
+    // tracker.centerImage.votes +=1;
     tracker.rightImage = products[tracker.getRandomIndex()];
     while (tracker.rightImage in lastSet || tracker.rightImage === tracker.leftImage || tracker.rightImage === tracker.centerImage) {
       tracker.rightImage = products[tracker.getRandomIndex()];
     }
     tracker.rightImage.views += 1;
-    // if (event) {
-    //   tracker.leftImage.votes +=1;
-    // }
+    // tracker.leftImage.votes +=1;
 
     leftImgEl.src = tracker.leftImage.src;
     centerImgEl.src = tracker.centerImage.src;
