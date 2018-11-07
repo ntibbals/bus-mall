@@ -19,9 +19,23 @@ div.images {
   position: absolute;
   padding-left: 32%
 }
+#reset-button {
+  padding-left: 24%;
+  padding-top:2%;
+  font-size: 20px;
+  /* width: 10%; */
+  /* font-family: 'Times New Roman', Times, serif;
+  /* color: white;
+  background-color: black; */
+  /* border-radius: 10px;
+  position: absolute; */ */
+}
+/* #button:hover {
+  color: red;
+} */
 #results-head {
   text-align: center;
-  padding-top: 2%;
+  /* padding-top: 2%; */
   font-size: 30px;
 }
 footer {
