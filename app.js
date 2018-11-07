@@ -88,7 +88,6 @@ function renderResults() {
   resetEl.textContent = 'Reset Survey';
   resetDivEl.appendChild(resetEl);
   resetEl.addEventListener('click', refreshSurvey);
-
 }
 function refreshSurvey (event) {
   event.preventDefault;
