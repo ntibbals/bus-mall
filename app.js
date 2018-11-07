@@ -3,6 +3,7 @@ var ctx = document.getElementById('myChart').getContext('2d');
 var products = [];
 var names = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var totalClicks = 0;
+var votesArray = [];
 var lastSet = [];
 var leftImgEl = document.getElementById('left-image');
 var centerImgEl = document.getElementById('center-image');
@@ -50,7 +51,7 @@ var tracker = {
       tracker.rightImage = products[tracker.getRandomIndex()];
     }
     totalClicks++;
-    if (totalClicks > 26) {
+    if (totalClicks > 6) {
       leftImgEl.removeEventListener('click', myClique);
       centerImgEl.removeEventListener('click', myClique);
       rightImgEl.removeEventListener('click', myClique);
@@ -79,18 +80,13 @@ function myClique (event) {
   for (var i = 0; i < products.length; i++)
     if (products[i].name === elId){
       products[i].votes++;
-    }
-  tracker.getUniqueImages();
-  var pId = event.target.id;
-  var voteX = products.indexOf(pId);
-  if (voteX !== -1) {
-    myChart.data.datasets[0].data[voteX] +=1;
-    console.log(myChart.data.datasets[0].data);
-    myChart.update();
+      var voteData = JSON.stringify(products[i].name);
+      votesArray.push(voteData);
+      localStorage.setItem('votes', votesArray);
 
-    var jsonData = JSON.stringify(myChart.data.dataset[0].data);
-    localStorage.setItem('votes', jsonData);
-  }
+    }
+    // var storedCount = JSON.parse(localStorage.getItem('countArray'));
+  tracker.getUniqueImages();
 }
 tracker.getUniqueImages();
 function renderResults() {
@@ -112,12 +108,8 @@ function renderResults() {
     votes.push(products[j].votes);
   }
 
-  // var colors = [];
-  // for (var k = 0; k < products.length; k++) {
-  //   colors.push(products[k].rgbaColor);
-  // }
   var chartConfig = {
-    type: 'bar',
+    type: 'horizontalBar',
     data: {
       labels: names,
       datasets: [{
@@ -138,12 +130,7 @@ function renderResults() {
   };
   return new Chart(ctx, chartConfig);
 }
-var myChart = new Chart(ctx, renderResults.chartConfig);
-if(localStorage.getItem('votes')) {
-  var voteData = localStorage.getItem('votes');
-  myChart.data.datasets[0].data = JSON.parse(voteData);
-  myChart.update();
-}
+
 leftImgEl.addEventListener('click', myClique);
 centerImgEl.addEventListener('click', myClique);
 rightImgEl.addEventListener('click', myClique);
