@@ -7,7 +7,6 @@ var leftImgEl = document.getElementById('left-image');
 var centerImgEl = document.getElementById('center-image');
 var rightImgEl = document.getElementById('right-image');
 var results = document.getElementById('results');
-var reset = document.getElementById('reset-button');
 console.log(lastSet);
 function Product(name, src) {
   this.name = name;
@@ -27,7 +26,6 @@ var tracker = {
   rightImage: [],
   getRandomIndex: function () {
     return Math.floor(Math.random() * (20 - 1));
-    console.log(this.getRandomIndex);
   },
   getUniqueImages: function () {
     tracker.leftImage = products[tracker.getRandomIndex()]; //pushes one item at a random index[i] from products array to property leftImage within tracker variable
