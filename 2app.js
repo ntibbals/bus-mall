@@ -1,74 +1,131 @@
 'use-strict';
-
 var products = [];
-// var name = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
-// var src = ['./assets/bag.jpg', './assets/banana.jpg', './assets/bathroom.jpg', './assets/boots.jpg', './assets/breakfast.jpg', './assets/bubblegum.jpg', './assets/chair.jpg', './assets/cthulhu.jpg', './assets/dog-duck.jpg', './assets/dragon.jpg', './assets/pen.jpg', './assets/petsweep.jpg', './assets/scissors.jpg', './assets/shark.jpg', './assets/sweep.jpg', './assets/tauntaun.jpg', './assets/unicorn.jpg', './assets/usb.jpg', './assets/water-can.jpg', './assets/wine-glass.jpg'];
-
-function Product() {
-  this.name = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'],
-    this.src = ['./assets/bag.jpg', './assets/banana.jpg', './assets/bathroom.jpg', './assets/boots.jpg', './assets/breakfast.jpg', './assets/bubblegum.jpg', './assets/chair.jpg', './assets/cthulhu.jpg', './assets/dog-duck.jpg', './assets/dragon.jpg', './assets/pen.jpg', './assets/petsweep.jpg', './assets/scissors.jpg', './assets/shark.jpg', './assets/sweep.jpg', './assets/tauntaun.jpg', './assets/unicorn.jpg', './assets/usb.jpg', './assets/water-can.jpg', './assets/wine-glass.jpg'],
-    this.votes = 0,
-    this.views = 0,
-    products.push(this);
-};
-
+var names = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+var totalClicks = 0;
+var lastSet = [];
+var results = document.getElementById('results');
+console.log(lastSet);
+function Product(name, src) {
+  this.name = name;
+  this.src = src;
+  // this.votes = votes,
+  // this.views = views,
+  products.push(this);
+}
+(function imageArray() {
+  for (var i = 0; i < names.length; i++) {
+    new Product(names[i], 'img/' + names[i] + '.jpg');
+  }
+})();
 var tracker = {
   totalClicks: 0,
+  leftImage: [], //image placeholders
+  centerImage: [],
+  rightImage: [],
+  getRandomIndex: function () {
+    return Math.floor(Math.random() * (20 - 1));
+    console.log(this.getRandomIndex);
+  },
+  getUniqueImages: function () {
+    //can do one at a time or all at once
+    tracker.leftImage = products[tracker.getRandomIndex()]; //pushes one item at a random index[i] from products array to property leftImage within tracker variable
+    while (tracker.leftImage in lastSet) {
+      tracker.leftImage = products[tracker.getRandomIndex()];
+    }
+    tracker.centerImage = products[tracker.getRandomIndex()];
+    while (tracker.centerImage in lastSet || tracker.centerImage === tracker.leftImage) {
+      tracker.centerImage = products[tracker.getRandomIndex()];
+    }
+    tracker.rightImage = products[tracker.getRandomIndex()];
+    while (tracker.rightImage in lastSet || tracker.rightImage === tracker.leftImage || tracker.rightImage === tracker.centerImage) {
+      tracker.rightImage = products[tracker.getRandomIndex()];
+    }
+    lastSet.push = [tracker.leftImage, tracker.centerImage, tracker.rightImage];
+    totalClicks++;
+    console.log(totalClicks);
+    if (totalClicks ===25) {
+      document.getElementById('left-image').removeEventListener('click', tracker.getUniqueImages);
+      document.getElementById('center-image').removeEventListener('click', tracker.getUniqueImages);
+      document.getElementById('right-image').removeEventListener('click', tracker.getUniqueImages);
+      renderResults();
+    }
+  },
+  renderImages: function () { // all ideas or scaffold - think about how to break apart logic all properties you need on objects
+    tracker.getUniqueImages();
+    var mainEl = document.getElementById('bus-mall');
+    var divEl = document.createElement('div');
+    var leftImgEl = document.createElement('img');
+    var centerImgEl = document.createElement('img');
+    var rightImgEl = document.createElement('img');
+    divEl.id = 'div-holder';
+    leftImgEl.id = 'left-image';
+    leftImgEl.src = tracker.leftImage.src;
+    centerImgEl.id = 'center-image';
+    centerImgEl.src = tracker.centerImage.src;
+    rightImgEl.id = 'right-image';
+    rightImgEl.src = tracker.rightImage.src;
+    mainEl.appendChild(divEl);
+    divEl.appendChild(leftImgEl);
+    divEl.appendChild(centerImgEl);
+    divEl.appendChild(rightImgEl);
+  },
 };
-
-function getRandomIndex() {
-  var randomIndex = Math.floor(Math.random() * (20 - 1));
-  console.log(randomIndex);
-  return randomIndex;
-}
-function getUniqueImageOne() {
-  // getRandomIndex();
-  console.log(this.randomIndex);
-  console.log(this.src);
-  var imageOne = products.src[getRandomIndex()];
-  console.log(imageOne);
-  return imageOne;
-  console.log(imageOne);
-}
-function getUniqueImageTwo() {
-  getRandomIndex();
-  for (var i = 0; i < this.name.length; i++)
-    var imageTwo = this.src.length[i] * this.randomIndex;
-  console.log(imageTwo);
-  return imageTwo;
-}
-function getUniqueImageThree() {
-  getRandomIndex();
-  for (var i = 0; i < this.name.length; i++)
-    var imageThree = this.src.length[i] * this.randomIndex;
-  console.log(imageThree);
-  return imageThree;
-}
-
-function renderImages() {
-  getUniqueImageOne();
-  getUniqueImageTwo();
-  getUniqueImageThree();
+// var removeLeft = document.getElementById('left-image');
+// var removeCenter = document.getElementById('center-image');
+// var removeRight = document.getElementById('right-image');
+// removeLeft.remove();
+// removeCenter.remove();
+// removeRight.remove();
+// var removeDiv = document.getElementById('div-holder');
+// removeDiv.remove();
+// tracker.getUniqueImages();
+function removeElements() {
+  var removeLeft = document.getElementById('left-image');
+  var removeCenter = document.getElementById('center-image');
+  var removeRight = document.getElementById('right-image');
+  removeLeft.remove();
+  removeCenter.remove();
+  removeRight.remove();
+  tracker.getUniqueImages();
   var mainEl = document.getElementById('bus-mall');
   var divEl = document.createElement('div');
   var leftImgEl = document.createElement('img');
   var centerImgEl = document.createElement('img');
   var rightImgEl = document.createElement('img');
-
   leftImgEl.id = 'left-image';
-  leftImgEl.textContent = this.imageOne;
+  leftImgEl.src = tracker.leftImage.src;
   centerImgEl.id = 'center-image';
-  centerImgEl.textContent = this.imageTwo;
+  centerImgEl.src = tracker.centerImage.src;
   rightImgEl.id = 'right-image';
-  centerImgEl.textContent = this.imageThree;
-
-
+  rightImgEl.src = tracker.rightImage.src;
   mainEl.appendChild(divEl);
   divEl.appendChild(leftImgEl);
   divEl.appendChild(centerImgEl);
   divEl.appendChild(rightImgEl);
 }
+tracker.renderImages();
+function renderResults() {
+  for (var i = 0; i < products.length; i++) {
+    var listEl = document.createElement('li');
+    listEl.textContent = products[i].votes + 'votes for this' + products[i].name + ' and ' + products[i].views + 'views';
+  }
+  results.appendChild(listEl);
 
-Product();
-renderImages();
+}
+document.getElementById('left-image').addEventListener('click', function () {
+  removeElements();
+  tracker.renderImages();
+});
+document.getElementById('center-image').addEventListener('click', function () {
+  removeElements();
+  tracker.renderImages();
+});
+document.getElementById('right-image').addEventListener('click', function () {
+  removeElements();
+  tracker.renderImages();
+});
 
+// tracker.renderImages();
+console.log(tracker.leftImage);
+console.log(tracker.centerImage);
+console.log(tracker.rightImage);
