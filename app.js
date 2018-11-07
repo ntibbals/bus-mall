@@ -36,24 +36,24 @@ var tracker = {
     }
     tracker.leftImage.views += 1;
     if (event) {
-      tracker.leftImage.votes +=1;
+      products[0].votes +=1;
     }
     tracker.centerImage = products[tracker.getRandomIndex()];
     while (tracker.centerImage in lastSet || tracker.centerImage === tracker.leftImage) {
       tracker.centerImage = products[tracker.getRandomIndex()];
     }
     tracker.centerImage.views += 1;
-    if (event) {
-      tracker.leftImage.votes +=1;
-    }
+    // if (event) {
+    //   tracker.leftImage.votes +=1;
+    // }
     tracker.rightImage = products[tracker.getRandomIndex()];
     while (tracker.rightImage in lastSet || tracker.rightImage === tracker.leftImage || tracker.rightImage === tracker.centerImage) {
       tracker.rightImage = products[tracker.getRandomIndex()];
     }
     tracker.rightImage.views += 1;
-    if (event) {
-      tracker.leftImage.votes +=1;
-    }
+    // if (event) {
+    //   tracker.leftImage.votes +=1;
+    // }
 
     leftImgEl.src = tracker.leftImage.src;
     centerImgEl.src = tracker.centerImage.src;
@@ -74,7 +74,7 @@ tracker.getUniqueImages();
 function renderResults() {
   var ulElHook = document.getElementById('results-head');
   var ulEl = document.createElement('div');
-  ulEl.textContent = 'Thank you for voting!';
+  ulEl.textContent = 'Here are your results!';
   ulElHook.appendChild(ulEl);
   for (var i = 0; i < products.length; i++) {
     var listEl = document.createElement('li');
