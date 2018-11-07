@@ -100,3 +100,9 @@ rightImgEl.addEventListener('click', tracker.getUniqueImages);
 console.log(tracker.leftImage);
 console.log(tracker.centerImage);
 console.log(tracker.rightImage);
+
+function createChart () {
+var productResults = //need to build function for array of product results
+var canvasEl = document.getElementById('voting-results');
+
+new Chart (
