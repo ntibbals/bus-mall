@@ -116,7 +116,6 @@ function renderResults() {
   // for (var k = 0; k < products.length; k++) {
   //   colors.push(products[k].rgbaColor);
   // }
-
   var chartConfig = {
     type: 'bar',
     data: {
