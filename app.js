@@ -147,6 +147,7 @@ if(localStorage.getItem('votes')) {
 leftImgEl.addEventListener('click', myClique);
 centerImgEl.addEventListener('click', myClique);
 rightImgEl.addEventListener('click', myClique);
+
 console.log(tracker.leftImage);
 console.log(tracker.centerImage);
 console.log(tracker.rightImage);
