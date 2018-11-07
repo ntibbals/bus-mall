@@ -1,80 +1,92 @@
 'use-strict';
-
 var products = [];
 var names = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+var totalClicks = 0;
+var lastSet = [];
+var leftImgEl = document.getElementById('left-image');
+var centerImgEl = document.getElementById('center-image');
+var rightImgEl = document.getElementById('right-image');
+var results = document.getElementById('results');
+console.log(lastSet);
 function Product(name, src) {
   this.name = name;
   this.src = src;
-  // this.votes = votes,
-  // this.views = views,
+  this.votes = 0,
+  this.views = 0,
   products.push(this);
 }
-
 (function imageArray() {
   for (var i = 0; i < names.length; i++) {
     new Product(names[i], 'img/' + names[i] + '.jpg');
   }
 })();
 var tracker = {
-  totalClicks: 0,
-  //image placeholders
-  leftImage: [],
+  // totalClicks: 0,
+  leftImage: [], //image placeholders
   centerImage: [],
   rightImage: [],
-
   getRandomIndex: function () {
     return Math.floor(Math.random() * (20 - 1));
     console.log(this.getRandomIndex);
   },
-
-  getUniqueImages: function () {
-    //can do one at a time or all at once
+  getUniqueImages: function () {   
     tracker.leftImage = products[tracker.getRandomIndex()]; //pushes one item at a random index[i] from products array to property leftImage within tracker variable
-    // console.log(leftUniqueImage);
-    // tracker.leftImage.push(leftUniqueImage); //DOES NOT WORK!!!
+    while (tracker.leftImage in lastSet) {
+      tracker.leftImage = products[tracker.getRandomIndex()];
+    }
+    tracker.leftImage.views += 1;
+    if (event) {
+      tracker.leftImage.votes +=1;
+    }
     tracker.centerImage = products[tracker.getRandomIndex()];
-    // console.log(centerUniqueImage);
-    // tracker.centerImage.push(centerUniqueImage);
+    while (tracker.centerImage in lastSet || tracker.centerImage === tracker.leftImage) {
+      tracker.centerImage = products[tracker.getRandomIndex()];
+    }
+    tracker.centerImage.views += 1;
+    if (event) {
+      tracker.leftImage.votes +=1;
+    }
     tracker.rightImage = products[tracker.getRandomIndex()];
-    // console.log(rightUniqueImage);
-    // tracker.rightImage.push(rightUniqueImage);
-    // return [leftUniqueImage, centerUniqueImage, rightUniqueImage];
-  },
-  renderImages: function () { // all ideas or scaffold - think about how to break apart logic all properties you need on objects
-    this.getUniqueImages();
-    var mainEl = document.getElementById('bus-mall');
-    var divEl = document.createElement('div');
-    var leftImgEl = document.createElement('img');
-    var centerImgEl = document.createElement('img');
-    var rightImgEl = document.createElement('img');
+    while (tracker.rightImage in lastSet || tracker.rightImage === tracker.leftImage || tracker.rightImage === tracker.centerImage) {
+      tracker.rightImage = products[tracker.getRandomIndex()];
+    }
+    tracker.rightImage.views += 1;
+    if (event) {
+      tracker.leftImage.votes +=1;
+    }
 
-    leftImgEl.id = 'left-image';
     leftImgEl.src = tracker.leftImage.src;
-    // leftImgEl.id = tracker.leftImage.name;
-    centerImgEl.id = 'center-image';
     centerImgEl.src = tracker.centerImage.src;
-    rightImgEl.id = 'right-image';
     rightImgEl.src = tracker.rightImage.src;
-
-    mainEl.appendChild(divEl);
-    divEl.appendChild(leftImgEl);
-    divEl.appendChild(centerImgEl);
-    divEl.appendChild(rightImgEl);
+    lastSet.push = [tracker.leftImage, tracker.centerImage, tracker.rightImage];
+    totalClicks++;
+    console.log(totalClicks);
+    if (totalClicks === 26) {
+      leftImgEl.removeEventListener('click', tracker.getUniqueImages);
+      centerImgEl.removeEventListener('click', tracker.getUniqueImages);
+      rightImgEl.removeEventListener('click', tracker.getUniqueImages);
+      renderResults();
+    }
   },
-
-  // addClickTracker: function () {
-    
-
-  // },
-
-  // clickHandler: function (event) {//takes event in) // { // takes the event into
-  // },
-  // // };
-
 };
+tracker.getUniqueImages();
 
-tracker.renderImages();
+function renderResults() {
+  var ulElHook = document.getElementById('results-head');
+  var ulEl = document.createElement('div');
+  ulEl.textContent = 'Thank you for voting!';
+  ulElHook.appendChild(ulEl);
+  for (var i = 0; i < products.length; i++) {
+    var listEl = document.createElement('li');
+    listEl.textContent = products[i].name + ' has ' + products[i].votes + ' votes and ' + products[i].views + ' views';
+
+    results.appendChild(listEl);
+  }
+
+}
+leftImgEl.addEventListener('click', tracker.getUniqueImages);
+centerImgEl.addEventListener('click', tracker.getUniqueImages);
+rightImgEl.addEventListener('click', tracker.getUniqueImages);
 console.log(tracker.leftImage);
 console.log(tracker.centerImage);
 console.log(tracker.rightImage);
-
