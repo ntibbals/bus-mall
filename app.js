@@ -7,6 +7,7 @@ var leftImgEl = document.getElementById('left-image');
 var centerImgEl = document.getElementById('center-image');
 var rightImgEl = document.getElementById('right-image');
 var results = document.getElementById('results');
+var reset = document.getElementById('reset-button');
 console.log(lastSet);
 function Product(name, src) {
   this.name = name;
@@ -31,27 +32,30 @@ var tracker = {
   },
   getUniqueImages: function () {   
     tracker.leftImage = products[tracker.getRandomIndex()]; //pushes one item at a random index[i] from products array to property leftImage within tracker variable
+    console.log(tracker.leftImage);
     while (tracker.leftImage in lastSet) {
       tracker.leftImage = products[tracker.getRandomIndex()];
     }
     tracker.leftImage.views += 1;
-    tracker.leftImage.votes +=1;
-    // if (event) {
-    //   var i = tracker.leftImage;
-    //   products[i].votes +=1;
-    // }
+    if (event) {
+      tracker.leftImage.votes +=1;
+    }
     tracker.centerImage = products[tracker.getRandomIndex()];
     while (tracker.centerImage in lastSet || tracker.centerImage === tracker.leftImage) {
       tracker.centerImage = products[tracker.getRandomIndex()];
     }
     tracker.centerImage.views += 1;
-    // tracker.centerImage.votes +=1;
+    if (event) {
+      tracker.centerImage.votes +=1;
+    }
     tracker.rightImage = products[tracker.getRandomIndex()];
     while (tracker.rightImage in lastSet || tracker.rightImage === tracker.leftImage || tracker.rightImage === tracker.centerImage) {
       tracker.rightImage = products[tracker.getRandomIndex()];
     }
     tracker.rightImage.views += 1;
-    // tracker.leftImage.votes +=1;
+    if (event) {
+      tracker.leftImage.votes +=1;
+    }
 
     leftImgEl.src = tracker.leftImage.src;
     centerImgEl.src = tracker.centerImage.src;
@@ -77,10 +81,18 @@ function renderResults() {
   for (var i = 0; i < products.length; i++) {
     var listEl = document.createElement('li');
     listEl.textContent = products[i].name + ' has ' + products[i].votes + ' votes and ' + products[i].views + ' views';
-
     results.appendChild(listEl);
   }
+  var resetDivEl = document.getElementById('reset-button');
+  var resetEl = document.createElement('button');
+  resetEl.textContent = 'Reset Survey';
+  resetDivEl.appendChild(resetEl);
+  resetEl.addEventListener('click', refreshSurvey);
 
+}
+function refreshSurvey (event) {
+  event.preventDefault;
+  window.location.reload(true);
 }
 leftImgEl.addEventListener('click', tracker.getUniqueImages);
 centerImgEl.addEventListener('click', tracker.getUniqueImages);
