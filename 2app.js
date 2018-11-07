@@ -148,3 +148,71 @@ rightImgEl.alt = tracker.rightImage.name;
 products[tracker.leftImage].views++;
 products[tracker.centerImage].views++;
 products[tracker.rightImage].views++;
+
+// var colors = ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"];
+
+// var colorsEl =  document.getElementById()
+
+// var ctx = document.getElementById("myChart").getContext('2d');
+
+// var myChart = new Chart(ctx, {
+//   var chartConfig = {
+//     type: 'bar',
+//     data: {
+//         labels: names, //should mirror our colors array so it dynamic
+//         datasets: [{
+//             label: '# of Votes',
+//             data: [12, 19, 3, 5, 2, 3], // whatever length of array, should correlate with values?  needs to match up appropriatelly 
+//             backgroundColor: [
+//                 'rgba(255, 99, 132, 0.2)',
+//                 'rgba(54, 162, 235, 0.2)',
+//                 'rgba(255, 206, 86, 0.2)',
+//                 'rgba(75, 192, 192, 0.2)',
+//                 'rgba(153, 102, 255, 0.2)',
+//                 'rgba(255, 159, 64, 0.2)'
+//             ],
+//             borderColor: [
+//                 'rgba(255,99,132,1)',
+//                 'rgba(54, 162, 235, 1)',
+//                 'rgba(255, 206, 86, 1)',
+//                 'rgba(75, 192, 192, 1)',
+//                 'rgba(153, 102, 255, 1)',
+//                 'rgba(255, 159, 64, 1)'
+//             ],
+//             borderWidth: 1
+//         }]
+//     },
+//     options: {
+//         scales: {
+//             yAxes: [{
+//                 ticks: {
+//                     beginAtZero:true //tells y axis to begin at 0
+//                 }
+//             }]
+//         }
+//     }
+// });
+
+// var myCharl = new Chart(ctx, chartConfig);
+
+// chartConfig.data.datasets[0].data //nested nested nested
+
+// // to enable click 
+
+// data: new Array(colors.length).fill(0);
+// //create id tages within each element  to target
+
+// colorsEl.addEventListener('click', function(event) {
+//   //validate target was a p tag
+//   //get the id of the target p tag
+//   //use the id to get the index locaiton for hwat data point to increment in data
+//   var pId = event.target;
+//   console.log(pEL);
+//   var idx = colors.indexOf(pId);
+//   if(idx !== -1) { // if index is not -1
+//     //do a thing
+//     myChart.data.dataset[0].data[idx] += 1; //increments by one
+//     myChart.update();
+//   }
+
+// })
