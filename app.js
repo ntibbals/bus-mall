@@ -3,8 +3,9 @@ var ctx = document.getElementById('myChart').getContext('2d');
 var products = [];
 var names = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var totalClicks = 0;
-var votesArray = [];
 var lastSet = [];
+var storedData = [];
+
 var leftImgEl = document.getElementById('left-image');
 var centerImgEl = document.getElementById('center-image');
 var rightImgEl = document.getElementById('right-image');
@@ -51,7 +52,7 @@ var tracker = {
       tracker.rightImage = products[tracker.getRandomIndex()];
     }
     totalClicks++;
-    if (totalClicks > 6) {
+    if (totalClicks > 26) {
       leftImgEl.removeEventListener('click', myClique);
       centerImgEl.removeEventListener('click', myClique);
       rightImgEl.removeEventListener('click', myClique);
@@ -80,15 +81,9 @@ function myClique (event) {
   for (var i = 0; i < products.length; i++)
     if (products[i].name === elId){
       products[i].votes++;
-      var voteData = JSON.stringify(products[i].name);
-      votesArray.push(voteData);
-      localStorage.setItem('votes', votesArray);
-
     }
-    // var storedCount = JSON.parse(localStorage.getItem('countArray'));
   tracker.getUniqueImages();
 }
-tracker.getUniqueImages();
 function renderResults() {
   var divElHook = document.getElementById('results-head');
   var divEl = document.createElement('div');
@@ -107,7 +102,20 @@ function renderResults() {
   for (var j = 0; j < products.length; j++) {
     votes.push(products[j].votes);
   }
-
+  var votedArray = [];
+  var votesArray = [];
+  if (localStorage.getItem('votes')) {
+    var votesData = localStorage.getItem('votes');
+    votedArray = JSON.parse(votesData);
+    console.log(votedArray);
+    for ( var h = 0; h < products.length; h++) {
+      votedArray[h] = parseInt(votedArray[h]);
+      votes[h] += votedArray[h];
+    }
+    console.log(votedArray);
+    console.log(votesArray);  
+    // tracker.votes.push(storedData);
+  }
   var chartConfig = {
     type: 'horizontalBar',
     data: {
@@ -128,6 +136,9 @@ function renderResults() {
       }
     }
   };
+  var voteData = JSON.stringify(votes);
+  votesArray.push(voteData);
+  localStorage.setItem('votes', votesArray);
   return new Chart(ctx, chartConfig);
 }
 
@@ -138,3 +149,4 @@ rightImgEl.addEventListener('click', myClique);
 console.log(tracker.leftImage);
 console.log(tracker.centerImage);
 console.log(tracker.rightImage);
+console.log(storedData);
