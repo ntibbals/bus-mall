@@ -51,7 +51,7 @@ var tracker = { //variable that holds the random images generated, function that
     tracker.leftImage.views++; //tallying views of each individual image
     tracker.centerImage.views++;
     tracker.rightImage.views++;
-    if (totalClicks > 6) { //tracks total clicks to remove event listeners once 25 clicks occur
+    if (totalClicks > 26) { //tracks total clicks to remove event listeners once 25 clicks occur
       leftImgEl.removeEventListener('click', myClique);
       centerImgEl.removeEventListener('click', myClique);
       rightImgEl.removeEventListener('click', myClique);
