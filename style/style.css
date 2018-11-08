@@ -2,7 +2,7 @@ body {
   padding-right: 3%;
   padding-left: 1%;
   font-family: 'Times New Roman', Times, serif;
-  background-color: rgb(191, 223, 223)
+  background-color: rgb(189, 239, 243);
 }
 h1 {
   padding-top: 3%;
@@ -39,12 +39,14 @@ div.images {
 #chart-div {
   position: absolute;
   padding-top: 1%;
-  width: 500px;
-  height: 750px;
+  width: auto;
+  height: auto;
+  margin-bottom: 40px;
   opacity: 0.90;
   background-color: aliceblue;
   border-radius: 8px;
   margin-top: 30px;
+  margin-left: 90px;
 }
 #results-head {
   position: absolute;
