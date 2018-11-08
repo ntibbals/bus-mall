@@ -39,8 +39,11 @@ var tracker = { //variable that holds the random images generated, function that
     lastSet[0] = tracker.leftImage; //pushes image selected into array to pull from in checking for duplicates next roll
     lastSet[1] = tracker.centerImage;
     lastSet[2] = tracker.rightImage;
+    leftImgEl.style.borderRadius = '10px';
     leftImgEl.src = tracker.leftImage.src; //image elements placing images on HTML
+    centerImgEl.style.borderRadius = '10px';
     centerImgEl.src = tracker.centerImage.src;
+    rightImgEl.style.borderRadius = '10px';
     rightImgEl.src = tracker.rightImage.src;
     leftImgEl.id = tracker.leftImage.name; //assigning id for vote tracker
     centerImgEl.id = tracker.centerImage.name;
@@ -76,7 +79,12 @@ function renderResults() { //function that displays results once 25 clicks hit
   divElHook.appendChild(divEl);
   var resetDivEl = document.getElementById('reset-button');
   var resetEl = document.createElement('button');
-  resetEl.textContent = 'Reset Survey';
+  resetEl.style.width = '400px';
+  resetEl.style.height = '75px';
+  resetEl.style.borderRadius = '10px';
+  resetEl.style.backgroundColor ='#000000';
+  resetEl.style.color = 'ffffff';
+  resetEl.textContent = 'Choose Your Destiny - Reset';
   resetDivEl.appendChild(resetEl);
   resetEl.addEventListener('click', refreshSurvey);
   var votes = [];
@@ -100,12 +108,21 @@ function renderResults() { //function that displays results once 25 clicks hit
       datasets: [{
         label: ' Total Number of Votes',
         data: votes,
-        backgroundColor:['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000',]
+        backgroundColor:['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000'],
+        borderColor: ['#000000'],
+        borderWidth: 2
       }]
     },
     options: {
       scales: {
         yAxes: [{
+          plotOptions: {
+            series: {
+              groupPadding: 0
+            }
+          },
+          barPercentage: 2.0,
+          categoryPercentage: .5,
           ticks: {
             beginAtZero: true
           }
