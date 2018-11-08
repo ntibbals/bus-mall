@@ -40,11 +40,15 @@ div.images {
   position: absolute;
   padding-top: 1%;
   width: 500px;
-  height: 1200px;
+  height: 750px;
   opacity: 0.90;
+  background-color: aliceblue;
+  border-radius: 8px;
+  margin-top: 30px;
 }
 #results-head {
   position: absolute;
+  margin-bottom: 30px;
   padding-left: 8%;
   color: rgb(238, 70, 70);
   font-size: 30px;
