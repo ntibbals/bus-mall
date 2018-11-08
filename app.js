@@ -4,6 +4,8 @@ var products = [];
 var names = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var totalClicks = 0;
 var lastSet = [];
+var storedData = [];
+
 var leftImgEl = document.getElementById('left-image');
 var centerImgEl = document.getElementById('center-image');
 var rightImgEl = document.getElementById('right-image');
@@ -81,18 +83,7 @@ function myClique (event) {
       products[i].votes++;
     }
   tracker.getUniqueImages();
-  var pId = event.target.id;
-  var voteX = products.indexOf(pId);
-  if (voteX !== -1) {
-    myChart.data.datasets[0].data[voteX] +=1;
-    console.log(myChart.data.datasets[0].data);
-    myChart.update();
-
-    var jsonData = JSON.stringify(myChart.data.dataset[0].data);
-    localStorage.setItem('votes', jsonData);
-  }
 }
-tracker.getUniqueImages();
 function renderResults() {
   var divElHook = document.getElementById('results-head');
   var divEl = document.createElement('div');
@@ -111,13 +102,22 @@ function renderResults() {
   for (var j = 0; j < products.length; j++) {
     votes.push(products[j].votes);
   }
-
-  // var colors = [];
-  // for (var k = 0; k < products.length; k++) {
-  //   colors.push(products[k].rgbaColor);
-  // }
+  var votedArray = [];
+  var votesArray = [];
+  if (localStorage.getItem('votes')) {
+    var votesData = localStorage.getItem('votes');
+    votedArray = JSON.parse(votesData);
+    console.log(votedArray);
+    for ( var h = 0; h < products.length; h++) {
+      votedArray[h] = parseInt(votedArray[h]);
+      votes[h] += votedArray[h];
+    }
+    console.log(votedArray);
+    console.log(votesArray);  
+    // tracker.votes.push(storedData);
+  }
   var chartConfig = {
-    type: 'bar',
+    type: 'horizontalBar',
     data: {
       labels: names,
       datasets: [{
@@ -136,14 +136,12 @@ function renderResults() {
       }
     }
   };
+  var voteData = JSON.stringify(votes);
+  votesArray.push(voteData);
+  localStorage.setItem('votes', votesArray);
   return new Chart(ctx, chartConfig);
 }
-var myChart = new Chart(ctx, renderResults.chartConfig);
-if(localStorage.getItem('votes')) {
-  var voteData = localStorage.getItem('votes');
-  myChart.data.datasets[0].data = JSON.parse(voteData);
-  myChart.update();
-}
+
 leftImgEl.addEventListener('click', myClique);
 centerImgEl.addEventListener('click', myClique);
 rightImgEl.addEventListener('click', myClique);
@@ -151,3 +149,4 @@ rightImgEl.addEventListener('click', myClique);
 console.log(tracker.leftImage);
 console.log(tracker.centerImage);
 console.log(tracker.rightImage);
+console.log(storedData);
