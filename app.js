@@ -51,7 +51,7 @@ var tracker = { //variable that holds the random images generated, function that
     tracker.leftImage.views++; //tallying views of each individual image
     tracker.centerImage.views++;
     tracker.rightImage.views++;
-    if (totalClicks > 6) { //tracks total clicks to remove event listeners once 25 clicks occur
+    if (totalClicks > 26) { //tracks total clicks to remove event listeners once 25 clicks occur
       leftImgEl.removeEventListener('click', myClique);
       centerImgEl.removeEventListener('click', myClique);
       rightImgEl.removeEventListener('click', myClique);
@@ -108,8 +108,8 @@ function renderResults() { //function that displays results once 25 clicks reach
       datasets: [{
         label: ' Total Number of Votes',
         data: votes,
-        backgroundColor:['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000'],
-        borderColor: ['#000000'],
+        backgroundColor:['#ff2800', '#00ffff', '#fdee00', '#3f00ff', '#66ff00', '#2a52be', '#ff3800', '#00ff00', '#7df9ff', '#ffff00', '#f400a1', '#ffbf00', '#c80815', '#273be2', '#0014a8', '#fd0e35', '#fffafa', '#ff33cc', '#00fa9a', '#7df9ff'],
+        borderColor: [],
         borderWidth: 2
       }]
     },
