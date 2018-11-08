@@ -72,7 +72,7 @@ function myClique (event) { //tracks votes on each selected image
     }
   tracker.getUniqueImages();
 }
-function renderResults() { //function that displays results once 25 clicks hit
+function renderResults() { //function that displays results once 25 clicks reached
   var divElHook = document.getElementById('results-head');
   var divEl = document.createElement('div');
   divEl.textContent = 'Here are your results!';
