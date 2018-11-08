@@ -1,22 +1,13 @@
 'use-strict';
-var ctx = document.getElementById('myChart').getContext('2d');
+var ctx = document.getElementById('myChart').getContext('2d'); //hook for chart
 var products = [];
 var names = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
-var totalClicks = 0;
+var totalClicks = 0; // counter for each image click
 var lastSet = [];
 var storedData = [];
-
 var leftImgEl = document.getElementById('left-image');
 var centerImgEl = document.getElementById('center-image');
 var rightImgEl = document.getElementById('right-image');
-// var results = document.getElementById('results');
-// var localStorage = [];
-// var myChart = new Chart(ctx, chartConfig);
-// if(localStorage.Storage.getItem('votes')) {
-//   var voteData = localStorage.getItem('votes');
-//   myChart.data.datasets[0].data = JSON.parse(voteData);
-//   myChart.update();
-// }
 console.log(lastSet);
 function Product(name, src) {
   this.name = name;
@@ -107,14 +98,12 @@ function renderResults() {
   if (localStorage.getItem('votes')) {
     var votesData = localStorage.getItem('votes');
     votedArray = JSON.parse(votesData);
-    console.log(votedArray);
     for ( var h = 0; h < products.length; h++) {
       votedArray[h] = parseInt(votedArray[h]);
       votes[h] += votedArray[h];
     }
     console.log(votedArray);
     console.log(votesArray);  
-    // tracker.votes.push(storedData);
   }
   var chartConfig = {
     type: 'horizontalBar',
@@ -141,11 +130,9 @@ function renderResults() {
   localStorage.setItem('votes', votesArray);
   return new Chart(ctx, chartConfig);
 }
-
 leftImgEl.addEventListener('click', myClique);
 centerImgEl.addEventListener('click', myClique);
 rightImgEl.addEventListener('click', myClique);
-
 console.log(tracker.leftImage);
 console.log(tracker.centerImage);
 console.log(tracker.rightImage);
