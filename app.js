@@ -51,7 +51,7 @@ var tracker = { //variable that holds the random images generated, function that
     tracker.leftImage.views++; //tallying views of each individual image
     tracker.centerImage.views++;
     tracker.rightImage.views++;
-    if (totalClicks > 26) { //tracks total clicks to remove event listeners once 25 clicks occur
+    if (totalClicks > 6) { //tracks total clicks to remove event listeners once 25 clicks occur
       leftImgEl.removeEventListener('click', myClique);
       centerImgEl.removeEventListener('click', myClique);
       rightImgEl.removeEventListener('click', myClique);
@@ -75,7 +75,7 @@ function myClique (event) { //tracks votes on each selected image
 function renderResults() { //function that displays results once 25 clicks reached
   var divElHook = document.getElementById('results-head');
   var divEl = document.createElement('div');
-  divEl.textContent = 'Here are your results!';
+  divEl.textContent = 'The results are in!';
   divElHook.appendChild(divEl);
   var resetDivEl = document.getElementById('reset-button');
   var resetEl = document.createElement('button');
@@ -108,7 +108,28 @@ function renderResults() { //function that displays results once 25 clicks reach
       datasets: [{
         label: ' Total Number of Votes',
         data: votes,
-        backgroundColor:['#ff2800', '#00ffff', '#fdee00', '#3f00ff', '#66ff00', '#2a52be', '#ff3800', '#00ff00', '#7df9ff', '#ffff00', '#f400a1', '#ffbf00', '#c80815', '#273be2', '#0014a8', '#fd0e35', '#fffafa', '#ff33cc', '#00fa9a', '#7df9ff'],
+        color: '#000000',
+        backgroundColor:[
+          'rgba(125,249,255)',
+          'rgba(153,102,204)',
+          'rgba(255,51,204)',
+          'rgba(0,255,255)',
+          'rgba(42,82,190)',
+          'rgba(253,238,0)',
+          'rgba(63,0,255)',
+          'rgba(102,255,0)',
+          'rgba(0,20,168)',
+          'rgba(255,56,0)',
+          'rgba(0,255,0)',
+          'rgba(125,249,255)',
+          'rgba(255,255,0)',
+          'rgba(244,0,161)',
+          'rgba(255,191,0)',
+          'rgba(39,59,226)',
+          'rgba(253,14,53)',
+          'rgba(255,250,250)',
+          'rgba(0,250,154)',
+          'rgba(204,255,0)',],
         borderColor: [],
         borderWidth: 2
       }]
